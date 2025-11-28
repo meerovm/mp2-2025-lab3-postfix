@@ -6,7 +6,12 @@ int main()
 	int f = 0;
 	std::cout << " enter the expression or \" stop \" ";
 	std::cin >> str;
-	arithmetic c = arithmetic(str);
+	arithmetic c;
+	try {
+		c = arithmetic(str);
+	} catch(const std::invalid_argument& e){
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
 	while (f == 0) {
 		if (c.flag_x == 1) {
 			std::cout << "enter x ";
