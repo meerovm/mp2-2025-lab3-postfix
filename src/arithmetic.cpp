@@ -34,13 +34,17 @@ arithmetic::arithmetic(std::string str):q(0) {
 			if (str[i] == '-') {
 				t += str[i];
 				v = 2;
-				if (i+1 == str.size()) { throw std::invalid_argument("Invalid input"); }
+				if (i+1 == str.size()) { 
+					std::string M = "Invalid input " + std::to_string(i);
+					throw std::invalid_argument(M);
+				}
 				if (!((str[i + 1] - '0' > 0) && (str[i] - '0' <= 9))) {
 					w.Push(token("-"));
 				}
 			}
 			else {
-				throw std::invalid_argument("Invalid input");
+				std::string M = "Invalid input " + std::to_string(i);
+				throw std::invalid_argument(M);
 			}
 			break;
 		case 2:
@@ -77,7 +81,7 @@ arithmetic::arithmetic(std::string str):q(0) {
 				if ((str[i + 1] == 'i') && (str[i + 2] == 'n') && (str[i + 3] == '(')) {
 					t = "";
 					i += 4;
-					int kl = 1;
+					int kl = 0;
 					while ((kl >= 0) && (i != str.size())) {
 						if (str[i] == '(') { kl++; }
 						else {
@@ -87,8 +91,12 @@ arithmetic::arithmetic(std::string str):q(0) {
 						i++;
 					}
 					t.pop_back();
-					if ((i == str.size()) && (kl > 0)) { throw std::invalid_argument("Invalid input"); }
+					if ((i == str.size()) && (kl > 0)) {
+						std::string M = "Invalid input " + std::to_string(i);
+						throw std::invalid_argument(M);
+					}
 					else {
+						i--;
 						auto ww = arithmetic(t);
 						Stack<token> www;
 						while (!(ww.q.IsEmpty())) {
@@ -104,14 +112,17 @@ arithmetic::arithmetic(std::string str):q(0) {
 						flag_z = flag_z || ww.flag_z;
 					}
 				}
-				else { throw std::invalid_argument("Invalid input"); }
+				else {
+					std::string M = "Invalid input " + std::to_string(i);
+					throw std::invalid_argument(M);
+				}
 				v = 8;
 				break;
 			case 'c':
 				if ((str[i + 1] == 'o') && (str[i + 2] == 's') && (str[i + 3] == '(')) {
 					t = "";
 					i += 4;
-					int kl = 1;
+					int kl = 0;
 					while ((kl >= 0) && (i != str.size())) {
 						if (str[i] == '(') { kl++; }
 						else {
@@ -123,6 +134,7 @@ arithmetic::arithmetic(std::string str):q(0) {
 					t.pop_back();
 					if ((i == str.size()) && (kl > 0)) { throw std::invalid_argument("Invalid input"); }
 					else {
+						i--;
 						auto ww = arithmetic(t);
 						Stack<token> www;
 						while (!(ww.q.IsEmpty())) {
@@ -138,14 +150,17 @@ arithmetic::arithmetic(std::string str):q(0) {
 						flag_z = flag_z || ww.flag_z;
 					}
 				}
-				else { throw std::invalid_argument("Invalid input"); }
+				else {
+					std::string M = "Invalid input " + std::to_string(i);
+					throw std::invalid_argument(M);
+				}
 				v = 8;
 				break;
 			case 'l':
 				if ((str[i + 1] == 'o') && (str[i + 2] == 'g') && (str[i + 3] == '(')) {
 					t = "";
 					i += 4;
-					int kl = 1;
+					int kl = 0;
 					while ((kl >= 0) && (i != str.size())) {
 						if (str[i] == '(') { kl++; }
 						else {
@@ -157,6 +172,7 @@ arithmetic::arithmetic(std::string str):q(0) {
 					t.pop_back();
 					if ((i == str.size()) && (kl > 0)) { throw std::invalid_argument("Invalid input"); }
 					else {
+						i--;
 						auto ww = arithmetic(t);
 						Stack<token> www;
 						while (!(ww.q.IsEmpty())) {
@@ -172,14 +188,17 @@ arithmetic::arithmetic(std::string str):q(0) {
 						flag_z = flag_z || ww.flag_z;
 					}
 				}
-				else { throw std::invalid_argument("Invalid input"); }
+				else {
+					std::string M = "Invalid input " + std::to_string(i);
+					throw std::invalid_argument(M);
+				}
 				v = 8;
 				break;
 			case 'e':
 				if ((str[i + 1] == 'x') && (str[i + 2] == 'p') && (str[i + 3] == '(')) {
 					t = "";
 					i += 4;
-					int kl = 1;
+					int kl = 0;
 					while ((kl >= 0) && (i != str.size())) {
 						if (str[i] == '(') { kl++; }
 						else {
@@ -189,8 +208,12 @@ arithmetic::arithmetic(std::string str):q(0) {
 						i++;
 					}
 					t.pop_back();
-					if ((i == str.size()) && (kl > 0)) { throw std::invalid_argument("Invalid input"); }
+					if ((i == str.size()) && (kl > 0)) {
+						std::string M = "Invalid input " + std::to_string(i);
+						throw std::invalid_argument(M);
+					}
 					else {
+						i--;
 						auto ww = arithmetic(t);
 						Stack<token> www;
 						while (!(ww.q.IsEmpty())) {
@@ -206,7 +229,10 @@ arithmetic::arithmetic(std::string str):q(0) {
 						flag_z = flag_z || ww.flag_z;
 					}
 				}
-				else { throw std::invalid_argument("Invalid input"); }
+				else {
+					std::string M = "Invalid input " + std::to_string(i);
+					throw std::invalid_argument(M);
+				}
 				v = 8;
 				break;
 			case '(':
@@ -214,7 +240,8 @@ arithmetic::arithmetic(std::string str):q(0) {
 				w.Push(token("("));
 				break;
 			default:
-				throw std::invalid_argument("Invalid input");
+				std::string M = "Invalid input " + std::to_string(i);
+				throw std::invalid_argument(M);
 			}
 
 			break;
@@ -223,8 +250,10 @@ arithmetic::arithmetic(std::string str):q(0) {
 			case '.':
 				v = 6;
 				t += str[i];
+				break;
 			default:
-				throw std::invalid_argument("Invalid input");
+				std::string M = "Invalid input " + std::to_string(i);
+				throw std::invalid_argument(M);
 			}
 			break;
 		case 4:
@@ -304,7 +333,8 @@ arithmetic::arithmetic(std::string str):q(0) {
 				t += str[i];
 				break;
 			default:
-				throw std::invalid_argument("Invalid input");
+				std::string M = "Invalid input " + std::to_string(i);
+				throw std::invalid_argument(M);
 			}
 			break;
 		case 6:
@@ -324,7 +354,8 @@ arithmetic::arithmetic(std::string str):q(0) {
 				t += str[i];
 				break;
 			default:
-				throw std::invalid_argument("Invalid input");
+				std::string M = "Invalid input " + std::to_string(i);
+				throw std::invalid_argument(M);
 			}
 			break;
 		case 7:
@@ -395,9 +426,13 @@ arithmetic::arithmetic(std::string str):q(0) {
 				while ((!w.IsEmpty()) && (w.Check().flag != 12)) {
 					q.Push(w.Pop());
 				}
+				if (w.Check().flag == 12) {
+					w.Pop();
+				}
 				break;
 			default:
-				throw std::invalid_argument("Invalid input");
+				std::string M = "Invalid input " + std::to_string(i);
+				throw std::invalid_argument(M);
 			}
 			break;
 		case 8:
@@ -446,8 +481,22 @@ arithmetic::arithmetic(std::string str):q(0) {
 				}
 				w.Push(token("/"));
 				break;
+			case ')':
+				v = 8;
+				if (t != "") {
+					q.Push(token("number", std::stod(t)));
+				}
+				t = "";
+				while ((!w.IsEmpty()) && (w.Check().flag != 12)) {
+					q.Push(w.Pop());
+				}
+				if (w.Check().flag == 12) {
+					w.Pop();
+				}
+				break;
 			default:
-				throw std::invalid_argument("Invalid input");
+				std::string M = "Invalid input " + std::to_string(i);
+				throw std::invalid_argument(M);
 			}
 			break;
 		}
